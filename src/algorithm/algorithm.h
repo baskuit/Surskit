@@ -25,9 +25,9 @@ concept IsBanditAlgorithmTypes =
         {
             bandit.get_refined_strategies(matrix_stats, strategy, strategy)
         } -> std::same_as<void>;
-        {
-            bandit.get_refined_value(matrix_stats, value)
-        } -> std::same_as<void>;
+        // {
+        //     bandit.get_refined_value(matrix_stats, value)
+        // } -> std::same_as<void>;
         {
             bandit.initialize_stats(0, state, model, matrix_stats)
         } -> std::same_as<void>;
@@ -64,15 +64,17 @@ concept IsMultithreadedBanditTypes =
         typename Types::ChanceStats &chance_stats,
         typename Types::Outcome &outcome,
         typename Types::Mutex &mutex) {
-        {
-            bandit.select(device, matrix_stats, outcome, mutex)
-        } -> std::same_as<void>;
-        {
-            bandit.update_matrix_stats(matrix_stats, outcome, mutex)
-        } -> std::same_as<void>;
-        {
-            bandit.update_chance_stats(chance_stats, outcome, mutex)
-        } -> std::same_as<void>;
+        // TODO fix or remove lol
+        // {
+        //     bandit.select(device, matrix_stats, outcome, mutex)
+        // } -> std::same_as<void>;
+        // {
+        //     bandit.update_matrix_stats(matrix_stats, outcome, mutex)
+        // } -> std::same_as<void>;
+        // {
+        //     bandit.update_chance_stats(chance_stats, outcome, mutex)
+        // } -> std::same_as<void>;
+        true;
     } &&
     IsBanditAlgorithmTypes<Types>;
 

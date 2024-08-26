@@ -1,5 +1,5 @@
 #include <chrono>
-#include <pinyon.hh>
+#include <pinyon.h>
 
 /*
 Takes model types (requires the model be 'state-invariant')

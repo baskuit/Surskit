@@ -1,4 +1,4 @@
-#include <pinyon.hh>
+#include <pinyon.h>
 
 // using UnsolvedStateTypes = OneSumMatrixGame;
 using UnsolvedStateTypes = RandomTree<>;

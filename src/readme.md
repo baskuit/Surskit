@@ -54,7 +54,7 @@ This library requires a compiler that supports C++23. This is because of the use
 You will need at least `gcc-13`. As of Ubuntu 23.04, this can be installed by using `apt`. Older versions of Ubuntu and other distributions will probably require building the compiler from source.
 * clang
 As of this writing, there is a [bug](https://gcc.gnu.org/bugzilla//show_bug.cgi?id=109647) with clang-16 regarding libstdc++ version of the ranges library.
-The library will partially compile with clang-17; There is a clang bug that appears with `algorithm-generator.hh`. TODO try clang-18
+The library will partially compile with clang-17; There is a clang bug that appears with `algorithm-generator.h`. TODO try clang-18
 
 ### Concepts & Intellisense
 
@@ -116,7 +116,7 @@ One example is given by `tests/ab.cc`- in this test there are two type lists in 
 Pinyon also has utilities for aggregating multiple type lists and, most usefully, taking the 'cartesian product' of different implementations:
 
 ```cpp
-#include <pinyon.hh>
+#include <pinyon.h>
 
 auto bandit_type_pack = TypePack<Exp3<MonteCarloModel<MoldState<>>>>{};
 auto node_template_pack = NodeTemplatePack<DefaultNodes, LNodes, DebugNodes, FlatNodes>{};
@@ -233,7 +233,7 @@ Sometimes it is possible to just define all the required type lists at the top o
 
 There are two utilities in Pinyon that exemplify both the approaches that the library uses to handle this problem
 
-* `model-bandit.hh`
+* `model-bandit.h`
 
 * `node.cc`
 
@@ -252,67 +252,67 @@ TODO Dynamic Wrapper
 The structure of the `/src` directory mirrors the classification of search utilities into the five categories. 
 
 ### `/types`
-* `array.hh`
+* `array.h`
 optional container with fixed capacity
-* `matrix.hh`
+* `matrix.h`
 matrix implementation
-* `mutex.hh`
+* `mutex.h`
 lightweight spinlock alternative to `std::mutex`
-* `random.hh`
+* `random.h`
 two pseudo random number generators using Mersenne Twister and XOR shift
-* `rational.hh`
+* `rational.h`
 basic rational number
-* `strategy.hh`
+* `strategy.h`
 cache friendly type for storing policy information
-* `value.hh`
+* `value.h`
 data structure for storing payoffs for constant-sum and general games
 
 ### `/state`
-* `random-tree.hh`
+* `random-tree.h`
 highly extensible and well-defined random games
-* `traversed.hh`
+* `traversed.h`
 creates a solved state from an unsolved state using the `FullTraversal` algorithm
-* `test-states.hh`
+* `test-states.h`
 toy states for testing
-* `model-bandit.hh`
+* `model-bandit.h`
 creates a abstract state that is essentially a symmetric matrix game; the 'actions' for this game are models, and when `apply_actions(row_model, col_model)` is called the models will play games vs each other. Leverages search functions to evaluate the strength of different models and algorithms
 
 ### `/model`
-* `monte-carlo-model.hh`
+* `monte-carlo-model.h`
 monte carlo model using rollouts
-* `libtorch-model.hh`
+* `libtorch-model.h`
 wrapper for Libtorch models that adds synchronization mechanism for multi-threaded batched inference
-* `search-model.hh`
+* `search-model.h`
 an entire search process wrapped (using its own internal model) as a new model
-* `solved-model.hh`
+* `solved-model.h`
 a model that merely provides Nash equilibrium strategies and payoffs as its inference
 
 ### `/algorithm`
-* `alpha-beta.hh`
+* `alpha-beta.h`
 implementation for AlphaBeta (see `/docs` for paper), modified and optimized for stochastic games
-* `full-traversal.hh`
+* `full-traversal.h`
 simple solver that traverses the entire game tree (up to depth `n`)
-* `exp3.hh`
+* `exp3.h`
 grandfather of all adversarial bandit algorithms
-* `rand.hh`
+* `rand.h`
 trivial bandit algorithm for bench-marking
-* `matrix-ucb.hh`
+* `matrix-ucb.h`
 	implementation of the Matrix-UCB algorithm (see `/docs` for paper), modified slightly for tree context
-* `tree-bandit.hh`
+* `tree-bandit.h`
 	vanilla MCTS
-* `tree-bandit-flat.hh`
+* `tree-bandit-flat.h`
 	identical behaviour to above but implemented without dynamic allocation of tree data, so it tends to be faster in most practical contexts
-* `multithreaded.hh`
+* `multithreaded.h`
 	two multi-threaded MCTS implementations, balancing cache use vs lock contention
-* `off-policy.hh`
+* `off-policy.h`
 	experimental batched inference MCTS
 
 ### `/tree`
-* `tree.hh`
+* `tree.h`
 default matrix and chance node implementations where retrieving a node is done with linked list traversal
-* `tree-debug.hh`
+* `tree-debug.h`
 same as default but with more information, particularly 'backwards' node links
-* `tree-flat.hh`
+* `tree-flat.h`
 links to children are stored in a heap array and hash map, rather than a linked list
 * `tree-obs`
 same as default, but `Obs` data is not stored in the matrix nodes directly
@@ -320,13 +320,13 @@ same as default, but `Obs` data is not stored in the matrix nodes directly
 There is also a directory for miscellaneous utilities.
 
 ### `/libpinyon`
-* `dynamic-wrappers.hh`
+* `dynamic-wrappers.h`
 duck typing wrappers for states, models, and searches
-* `enable-concepts.hh`
-* `generator.hh`
+* `enable-concepts.h`
+* `generator.h`
 general purpose 'map from catesian product' utility
-* `grow-lib.hh`
+* `grow-lib.h`
 functions for creating different kinds of random trees. TODO
-* `lrslib.hh`
+* `lrslib.h`
 high level bimatrix solver using Enumeration of Extreme Equilibria algorithm
 * misc template utilities

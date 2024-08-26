@@ -2,7 +2,7 @@
 #include <vector>
 #include <chrono>
 
-#include "./types/random.hh"
+#include "./types/random.h"
 
 // template <typename T>
 // concept State = requires () {

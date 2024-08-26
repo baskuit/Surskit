@@ -22,7 +22,7 @@ Various *implementations* of the same object can be quickly and automatically be
 Many tasks can be settled with a small script. Once a process is described in terms of the interface it's usually almost complete.
 
 ### Minimal Setup
-This is a header library that only depends on the GNU Multiple Precision Library. Inclusion into projects is done via cmake, i.e. `add_directory(extern/pinyon)` and `#include <pinyon.hh>`. 
+This is a header library that only depends on the GNU Multiple Precision Library. Inclusion into projects is done via cmake, i.e. `add_directory(extern/pinyon)` and `#include <pinyon.h>`. 
 
 # Documentation
 The library is extensively documented and the points above are expanded therein. The organization of the abstraction/modularity layers is reflected by the directory structure.

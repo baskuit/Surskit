@@ -1,4 +1,4 @@
-#include <pinyon.hh>
+#include <pinyon.h>
 
 const size_t max_actions = 2;
 const size_t max_depth = 10;

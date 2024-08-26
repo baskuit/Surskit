@@ -1,4 +1,4 @@
-#include <pinyon.hh>
+#include <pinyon.h>
 
 void random_matrix(prng device, const size_t rows, const size_t cols, const int discrete = 20)
 {

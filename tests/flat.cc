@@ -1,4 +1,4 @@
-#include <pinyon.hh>
+#include <pinyon.h>
 
 template <typename Types>
 void check_flat_search_equivalence(

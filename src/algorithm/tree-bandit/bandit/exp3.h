@@ -32,8 +32,8 @@ struct Exp3 : Types {
 
     class BanditAlgorithm {
        public:
-        const Real gamma{.01};
-        const Real one_minus_gamma{gamma * -1 + 1};
+        Real gamma{.01};
+        Real one_minus_gamma{gamma * -1 + 1};
 
         constexpr BanditAlgorithm() {}
 

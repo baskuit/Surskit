@@ -53,6 +53,7 @@ public:
     }
 
     void print() const
+    requires (std::cout << T{})
     {
         for (size_t row_idx = 0; row_idx < rows; ++row_idx)
         {

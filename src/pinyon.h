@@ -31,6 +31,7 @@
 // Algorithm
 
 #include <algorithm/tree-bandit/tree/tree-bandit.h>
+#include <algorithm/tree-bandit/tree/tree-bandit-root-matrix.h>
 #include <algorithm/tree-bandit/tree/tree-bandit-flat.h>
 #include <algorithm/tree-bandit/tree/multithreaded.h>
 #include <algorithm/tree-bandit/tree/off-policy.h>

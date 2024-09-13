@@ -1,3 +1,0 @@
-[submodule "extern/lrslib"]
-	path = extern/lrslib
-	url = https://github.com/baskuit/lrslib

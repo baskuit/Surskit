@@ -1,74 +1,74 @@
 #pragma once
 
-#include <array>
 #include <algorithm>
+#include <array>
+#include <assert.h>
+#include <cstddef>
 
-template <size_t MaxSize>
-struct A
-{
-    template <typename T>
-    struct Array : std::array<T, MaxSize>
-    {
-        size_t _size = 0;
+// Provides minimal std::vector interface around a std::array
+// May offer better performance in some cases
+template <std::size_t max_size> struct ArrayBasedVector {
+  template <typename T, typename CapacityT = std::size_t> class Vector {
+  private:
+    std::array<T, max_size> _storage;
+    CapacityT _size;
 
-        Array() {}
+  public:
+    constexpr Vector() : _size{} {}
 
-        Array (const size_t n) {
-            _size = n;
-            std::fill(this->begin(), this->end(), T{});
+    template <typename InT> constexpr Vector(const InT n) {
+      assert(0 < n && n <= max_size);
+      _size = n;
+      std::fill(this->begin(), this->end(), T{});
+    }
+
+    template <typename Vec> constexpr Vector(const Vec &other) noexcept {
+      assert(other.size() <= max_size);
+      _size = other.size();
+      std::copy(other.begin(), other.end(), _storage.begin());
+    }
+
+    template <typename Vec>
+    constexpr Vector &operator=(const Vec &other) noexcept {
+      assert(other.size() <= max_size);
+      _size = other.size();
+      std::copy(other.begin(), other.end(), _storage.begin());
+      return *this;
+    }
+
+    template <typename Vec> bool operator==(const Vec &other) const noexcept {
+      for (CapacityT i = 0; i < _size; ++i) {
+        if ((*this)[i] != other[i]) {
+          return false;
         }
+      }
+      return _size == other.size();
+    }
 
-        Array(const Array &other)
-        {
-            _size = other._size;
-            std::copy(other.begin(), other.end(), this->begin());
-        }
+    template <typename size_type>
+    constexpr void resize(size_type n, T val = T{}) {
+      assert(n <= max_size);
+      if (_size < n) {
+        std::fill(_storage.begin() + _size, _storage.begin() + n, val);
+      }
+      _size = n;
+    }
 
-        Array &operator=(const Array &other)
-        {
-            _size = other._size;
-            std::copy(other.begin(), other.end(), this->begin());
-            return *this;
-        }
+    template <typename size_type> void reserve(size_type n) noexcept {
+      assert(n <= max_size);
+      _size = n;
+    }
 
-        bool operator==(const Array &other) const
-        {
-            for (int i = 0; i < _size; ++i) {
-                if ((*this)[i] != other[i]) {
-                    return false;
-                }
-            }
-            return _size == other._size;
-        }
+    CapacityT size() const noexcept { return _size; }
 
-        void resize(size_t n, T value)
-        {
-            _size = n;
-            std::fill(this->begin(), this->end(), value);
-        }
+    constexpr void clear() noexcept { _size = 0; }
 
-        void resize(size_t n)
-        {
-            _size = n;
-        }
+    constexpr auto begin() noexcept { return _storage.begin(); }
 
-        size_t size() const
-        {
-            return _size;
-        }
+    constexpr const auto begin() const noexcept { return _storage.begin(); }
 
-        void clear () {
-            _size = 0;
-        }
+    constexpr auto end() noexcept { return _storage.begin() + _size; }
 
-        std::array<T, MaxSize>::iterator end()
-        {
-            return std::array<T, MaxSize>::begin() + _size;
-        }
-
-        const std::array<T, MaxSize>::const_iterator end() const
-        {
-            return std::array<T, MaxSize>::begin() + _size;
-        }
-    };
+    const auto end() const noexcept { return _storage.begin() + _size; }
+  };
 };

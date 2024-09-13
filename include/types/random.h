@@ -43,7 +43,7 @@ public:
   }
 
   template <template <typename...> typename Vector, typename T>
-    requires(declval(T).get_d())
+    requires(T::get_d())
   int sample_pdf(const Vector<T> &input) noexcept {
     double p = uniform();
     for (int i = 0; i < input.size(); ++i) {

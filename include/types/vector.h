@@ -16,7 +16,9 @@ template <std::size_t max_size> struct ArrayBasedVector {
   public:
     constexpr Vector() : _size{} {}
 
-    template <typename InT> constexpr Vector(const InT n) {
+    template <typename InT>
+      requires(std::is_integral_v<InT>)
+    constexpr Vector(const InT n) {
       assert(0 < n && n <= max_size);
       _size = n;
       std::fill(this->begin(), this->end(), T{});

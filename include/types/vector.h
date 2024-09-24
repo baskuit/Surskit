@@ -61,6 +61,10 @@ template <std::size_t max_size> struct ArrayBasedVector {
       _size = n;
     }
 
+    constexpr T& operator[](auto n) { return _storage[n]; }
+
+    constexpr const T& operator[](auto n) const { return _storage[n]; } 
+
     CapacityT size() const noexcept { return _size; }
 
     constexpr void clear() noexcept { _size = 0; }

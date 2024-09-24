@@ -9,7 +9,7 @@
 // May offer better performance in some cases
 template <std::size_t max_size> struct ArrayBasedVector {
   template <typename T, typename CapacityT = std::size_t> class Vector {
-  private:
+  protected:
     std::array<T, max_size> _storage;
     CapacityT _size;
 

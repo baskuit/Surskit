@@ -29,9 +29,8 @@ public:
 
   uint64_t uniform_64() noexcept { return uniform_64_(engine); }
 
-  template <template <typename...> typename Vector, typename T>
-  // requires(!std::is_same_v<T, mpq_class>)
-  int sample_pdf(const Vector<T> &input) noexcept {
+  template <typename Container>
+  int sample_pdf(const Container &input) noexcept {
     double p = uniform();
     for (int i = 0; i < input.size(); ++i) {
       p -= static_cast<double>(input[i]);

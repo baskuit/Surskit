@@ -96,7 +96,7 @@ struct TreeBanditRootMatrix : Types
             MatrixNode *matrix_node,
             Types::ModelOutput &model_output)
         {
-            if (state.is_terminal())
+            if (state.terminal())
             {
                 matrix_node->set_terminal();
                 model_output.value = state.get_payoff();

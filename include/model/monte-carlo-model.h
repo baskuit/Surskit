@@ -11,6 +11,13 @@ public:
 
   const auto inference(State &&state) {
     const auto rollout = [](PRNG &device, State &state) {
+      while (!state.terminal()) {
+        state.apply_actions(
+          state.row_actions[device.random_int(state.rows())],
+          state.col_actions[device.random_int(state.cols())]
+        );
+        state.get_actions();
+      }
       return state.payoff();
     };
     decltype(state.payoff()) value_total{};

@@ -29,7 +29,7 @@ concept IsNodeTypes =
             matrix_node.expand(0, 0)
         } -> std::same_as<void>;
         {
-            const_matrix_node.is_terminal()
+            const_matrix_node.terminal()
         } -> std::same_as<bool>;
 
         {

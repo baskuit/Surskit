@@ -50,7 +50,7 @@ struct DefaultNodes : Types {
 
         inline void expand(const size_t &, const size_t &) { expanded = true; }
 
-        inline bool is_terminal() const { return terminal; }
+        inline bool terminal() const { return terminal; }
 
         inline bool is_expanded() const { return expanded; }
 

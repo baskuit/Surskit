@@ -157,7 +157,7 @@ struct TreeBanditThreaded : Types
             typename Types::Mutex &tree_mutex{matrix_node->stats.tree_mutex};
 
             // no longer allows for artifically terminal nodes
-            if (state.is_terminal())
+            if (state.terminal())
             {
                 matrix_node->set_terminal();
                 model_output.value = state.get_payoff();
@@ -413,7 +413,7 @@ struct TreeBanditThreadPool : Types
             MatrixNode *const matrix_node,
             Types::ModelOutput &model_output)
         {
-            if (state.is_terminal())
+            if (state.terminal())
             {
                 matrix_node->set_terminal();
                 model_output.value = state.get_payoff();

@@ -9,7 +9,7 @@ public:
   MonteCarloModel() : device{} {}
   MonteCarloModel(const PRNG &device) : device{device} {}
 
-  const auto inference(State &&state) {
+  const auto inference(State &state) {
     const auto rollout = [](PRNG &device, State &state) {
       while (!state.terminal()) {
         state.apply_actions(

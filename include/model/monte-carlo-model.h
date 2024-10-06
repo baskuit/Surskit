@@ -24,6 +24,7 @@ public:
     if constexpr (trials > 1) {
       for (size_t t = 0; t < trials - 1; ++t) {
         auto state_copy{state};
+        state_copy.randomize_transition(device);
         value_total += rollout(device, state_copy);
       }
     }
